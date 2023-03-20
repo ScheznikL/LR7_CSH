@@ -16,7 +16,7 @@ namespace LR4_CSH
         private BindingSource _bs, _bsPersonData;
         private BindingList<Subject> _bindSublist;
         private bool _clicksave = false;
-        private bool _firstdblcklickflag = true;       
+        private bool _firstdblcklickflag = true;
 
         public Form1()
         {
@@ -39,7 +39,7 @@ namespace LR4_CSH
         }
 
         private void BtCreateNewGroup_Click(object sender, EventArgs e)
-        {            
+        {
             if (Group.Students.Count == 0)
             {
                 DilogSubjects newDialog = new DilogSubjects();
@@ -62,79 +62,60 @@ namespace LR4_CSH
             }
             else
             {
-                if(
+                if (
                 MessageBox.Show(this, "Whould you like to save current list to file?",
                    "Save",
-                   MessageBoxButtons.YesNoCancel,
+                   MessageBoxButtons.YesNo,
                    MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    ///TODO FileNAme
-                    SaveandResetStudentsData();
+                    SaveAndResetStudentsData();
                     BtCreateNewGroup_Click(sender, e);
                     panel1.Visible = true;
                 }
             }
-        }       
+        }
 
         private void BtLoadFromFile_Click(object sender, EventArgs e)
         {
             if (Group.Students.Count == 0)
             {
                 panel1.Visible = true;
-                SerializeJSON.DeserializeStudents();
+                SerializeJSON.DeserializeStudents(FileDialogOpenSave.FileDialogOpenFrom());
                 /************Twice*************/
                 SortableBindingList<Student> sortablestuds = new SortableBindingList<Student>(Group.Students);
                 _bsPersonData.DataSource = sortablestuds;
                 dgvPersons.DataSource = _bsPersonData;
                 dgvPersonalStudData.DataSource = _bs;
-                Group.CommonSubjectsFromDeser(); ///TODO
+                Group.ToSubjectsFromDeser();
             }
             else
             {
                 if (
                 MessageBox.Show(this, "Whould you like to save current list to file?",
                    "Save",
-                   MessageBoxButtons.YesNoCancel,
+                   MessageBoxButtons.YesNo,
                    MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    ///TODO FileNAme
-                    SaveandResetStudentsData();
+                    SaveAndResetStudentsData();
                     BtLoadFromFile_Click(sender, e);
                 }
             }
-      
+
         }
 
         private void dgvPersons_MouseClick(object sender, MouseEventArgs e)
         {
-            
-        } //TODO leave/add
+
+        }
 
         private void dgvPersons_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             dgvPersonalStudData.Visible = true;
 
-            //var see = dgvPersons.SelectedRows.Cast<DataGridViewRow>().Last();
-            //if (dgvPersons.SelectedRows.Cast<DataGridViewRow>().Last().Index == 1 && clicksave != true)
-            //{
-            //    if (MessageBox.Show(this, "Whould you like to save your changes?", "Save",
-            //    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) == DialogResult.Yes)
-            //    {
-            //        var lastselectedID = dgvPersons.SelectedRows.Cast<DataGridViewRow>().Last().Cells[0].Value?.ToString();
-            //        foreach (var stud in Group.Students.Where(x => x.Id == lastselectedID))
-            //        {
-            //            stud.Subjects = bindSublist.ToList();
-            //        }
-            //   MessageBox.Show(this, "Changes saved.",
-            //   "Chages to student list",
-            //   MessageBoxButtons.OK,
-            //   MessageBoxIcon.Information);
-            //    }
-            //}
             if (_bindSublist.Count > 0)
             {
                 _bindSublist.Clear();
-            }                
+            }
             if (dgvPersonalStudData.ReadOnly)
             {
                 dgvPersonalStudData.ReadOnly = false;
@@ -150,15 +131,15 @@ namespace LR4_CSH
             ForSelectionEnable();
             _firstdblcklickflag = false;
         }
-               
+
         private void BtSave_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show(this, "Whould you like to save your changes?", "Save",
-                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) == DialogResult.Yes)
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-               
+
                 var chosenlist = _bsPersonData.Current as Student;
-                
+
                 foreach (var stud in Group.Students.Where(x => x.Id == chosenlist.Id))
                 {
                     stud.Subjects = _bindSublist.ToList();
@@ -180,7 +161,7 @@ namespace LR4_CSH
                 MessageBoxIcon.Information);
 
                 BtSave.Visible = true;
-               // _bsPersonData.ResetBindings(false);
+                // _bsPersonData.ResetBindings(false);
             }
         }
 
@@ -231,14 +212,19 @@ namespace LR4_CSH
             }
         }
 
-        private void SaveandResetStudentsData()
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e) //TODO SAVE&FILENAME
         {
-            SerializeJSON.SerializeStudents();
+
+        }
+
+        private void SaveAndResetStudentsData()
+        {
+            SerializeJSON.SerializeStudents(FileDialogOpenSave.FileDialogSaveTo());
             Group.Students.Clear();
             _bsPersonData.ResetBindings(false);
             _bs.ResetBindings(false);
             panel1.Visible = false;
             dgvPersonalStudData.Visible = false;
-        }
+        }       
     }
 }

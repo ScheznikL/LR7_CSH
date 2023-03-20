@@ -132,12 +132,6 @@
   <metadata name="Grade.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="Subjects.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Grade.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -145,7 +139,7 @@
   <data name="panel1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAL8AAAA8CAIAAAC4rPwnAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAQ+SURBVHhe7ZnpceRACIUdlwNSPIpmkplgvH3QBzSoEWXZ
+        YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAQ+SURBVHhe7ZnpceRACIUdlwNSPIpmkplgvH3QBzSoEWXZ
         3qr3/RPieOC34ynvxxcAUeAeEAfuAXHgHhAH7gFx4B4QB+4BceAeEAfuAXHgHhAH7gFx4B4QB+4BceAe
         EAfuAXHgHhDnN9zzPj8/Ep/nmwLAyV+7nNc9ryPL7hyvGj1v7kHrF+CeO/zJy3ncU50zS+5eCu2Bz54o
         /91nDwmmD5uJ4qDYHqsdv5v3efz6hZ/Q8PzlMm7lO/eY5kmkVf6oe8LKvpFHNPyIe/zKd+6pco1u0X9d
@@ -166,15 +160,6 @@
         QBy4B8SBe0AcuAfEgXtAHLgHxIF7QBy4B8SBe0CUr69/Tz8f+gkO34kAAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="Id.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="dataGridViewTextBoxColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="dataGridViewTextBoxColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>50</value>
   </metadata>

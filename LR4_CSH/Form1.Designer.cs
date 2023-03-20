@@ -34,6 +34,9 @@
             this.BtLoadFromFile = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgvPersons = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvPersonalStudData = new System.Windows.Forms.DataGridView();
             this.Subjects = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Grade = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,10 +46,10 @@
             this.EditstudentsMenuI = new System.Windows.Forms.ToolStripMenuItem();
             this.EditsubjectsMenuI = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BtForSelection = new System.Windows.Forms.Button();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFromToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersons)).BeginInit();
@@ -119,6 +122,29 @@
             this.dgvPersons.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvPersons_MouseClick);
             this.dgvPersons.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgvPersons_MouseDoubleClick);
             // 
+            // Id
+            // 
+            this.Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "ID";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Width = 43;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "LastName";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Lastname";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Name";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Name";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
             // dgvPersonalStudData
             // 
             this.dgvPersonalStudData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -161,6 +187,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveToolStripMenuItem,
             this.editToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(290, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -180,14 +207,14 @@
             // EditstudentsMenuI
             // 
             this.EditstudentsMenuI.Name = "EditstudentsMenuI";
-            this.EditstudentsMenuI.Size = new System.Drawing.Size(180, 22);
+            this.EditstudentsMenuI.Size = new System.Drawing.Size(143, 22);
             this.EditstudentsMenuI.Text = "Students";
             this.EditstudentsMenuI.Click += new System.EventHandler(this.EditstudentsMenuI_Click);
             // 
             // EditsubjectsMenuI
             // 
             this.EditsubjectsMenuI.Name = "EditsubjectsMenuI";
-            this.EditsubjectsMenuI.Size = new System.Drawing.Size(180, 22);
+            this.EditsubjectsMenuI.Size = new System.Drawing.Size(143, 22);
             this.EditsubjectsMenuI.Text = "Add Subjects";
             this.EditsubjectsMenuI.Click += new System.EventHandler(this.EditsubjectsMenuI_Click);
             // 
@@ -203,29 +230,6 @@
             this.panel1.Size = new System.Drawing.Size(369, 231);
             this.panel1.TabIndex = 5;
             // 
-            // Id
-            // 
-            this.Id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Id.DataPropertyName = "Id";
-            this.Id.HeaderText = "ID";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            this.Id.Width = 43;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "LastName";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Lastname";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "Name";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Name";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
             // BtForSelection
             // 
             this.BtForSelection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -236,6 +240,28 @@
             this.BtForSelection.TabIndex = 6;
             this.BtForSelection.UseVisualStyleBackColor = false;
             this.BtForSelection.Click += new System.EventHandler(this.BtForSelection_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveAsToolStripMenuItem,
+            this.openFromToolStripMenuItem});
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.saveToolStripMenuItem.Text = "File";
+            // 
+            // saveAsToolStripMenuItem
+            // 
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Text = "Save as...";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
+            // 
+            // openFromToolStripMenuItem
+            // 
+            this.openFromToolStripMenuItem.Name = "openFromToolStripMenuItem";
+            this.openFromToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openFromToolStripMenuItem.Text = "Open from...";
             // 
             // Form1
             // 
@@ -285,6 +311,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.Button BtForSelection;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openFromToolStripMenuItem;
     }
 }
 

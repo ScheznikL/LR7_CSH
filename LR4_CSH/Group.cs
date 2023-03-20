@@ -53,38 +53,8 @@ namespace LR4_CSH
         {
             Subjects.AddRange(rows.Cast<DataGridViewRow>().Select(
                            x => new Subject() { Caption = x.Cells[0].Value?.ToString() }).ToList());
-            Subjects.Remove(Subjects.Where(x => x.Caption == "").First()); //? 
-                                                                           //foreach(DataGridViewRow sub in rows)
-                                                                           //{
-                                                                           //    Subjects.Add(new Subject() { Caption = sub.Cells[0].Value?.ToString()});
-                                                                           //}
-        }
-        public static void ComposeStudent()
-        {//TODO : To many count
-            //Students.AddRange(People.Join(Subjects, 
-            //    pup => pup.Groupnumber,
-            //    sub => sub.Groupnumber,
-            //    (Peop, Sub) => new Student
-            //    {
-            //        Name = Peop.Name,
-            //        LastName = Peop.LastName,
-            //        Groupnumber = Peop.Groupnumber,
-            //        Subjects = Subjects
-            //    }).ToList());
-
-            //Students.AddRange(People.Select(
-            //   Peop => new Student
-            //   {
-            //       Name = Peop.Name,
-            //       LastName = Peop.LastName,
-            //       Groupnumber = Peop.Groupnumber,
-            //       Subjects = Subjects,
-            //       //Grades = Subjects.ToDictionary(keySelector: m => m, elementSelector: m => (uint)0)
-            //   }).ToList());
-
-            // Students = People.
-            //       Concat(Subjects).ToList();
-        }
+            Subjects.Remove(Subjects.Where(x => x.Caption == "").First()); 
+        }       
         public static void EditSubjectList(DataGridViewRowCollection rows)
         {
             List<Subject> newsubjects = rows.Cast<DataGridViewRow>().Select(
@@ -111,7 +81,7 @@ namespace LR4_CSH
             //        Subjects = Subjects.ConvertAll(y => y.DeepCopy())
             //    }).ToList();
             Students.RemoveAll(x => x.LastName == "" && x.Name == "");
-            AddAnSubjectListForNewStudent();            
+            AddAnSubjectListForNewStudent();
         }
         private static void AddAnSubjectListForNewStudent()
         {
@@ -120,9 +90,31 @@ namespace LR4_CSH
                 stud.Subjects = Subjects.ConvertAll(y => y.DeepCopy());
             }
         }
-        public static void CommonSubjectsFromDeser() //TODO
+        public static void ToSubjectsFromDeser()
         {
-
+            List<string> sub;
+            FindCommonSubjectsFromStudents(out sub);
+            foreach(var subj in sub)
+            {
+                Subjects.Add(new Subject() { Caption = subj });
+            }
+        }
+        private static void FindCommonSubjectsFromStudents(out List<string> sub)
+        {
+            sub = new List<string>();
+            for (int i = 0; i < Students.Count; i++)
+            {
+                if (i == 0)
+                {
+                    sub.AddRange(Students[i].Subjects.Select(x => x.Caption).ToList()
+                    .Intersect(Students[i + 1].Subjects.Select(x => x.Caption).ToList()).ToList());
+                    i++;
+                }
+                else
+                {
+                    sub = sub.Intersect(Students[i].Subjects.Select(x => x.Caption).ToList()).ToList();
+                }
+            }            
         }
     }
 }

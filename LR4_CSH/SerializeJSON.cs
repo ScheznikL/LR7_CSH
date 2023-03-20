@@ -8,15 +8,15 @@ namespace LR4_CSH
 {
     static class SerializeJSON
     {      
-        public static void SerializeStudents()
+        public static void SerializeStudents(string path)
         {
             try
             {
              var jsonSerializer = new JsonSerializer();
-                        using (var file = new StreamWriter("students.json"))
-                        {
-                            jsonSerializer.Serialize(file, Group.Students);
-                        }
+                using (var file = new StreamWriter(path))
+                {
+                    jsonSerializer.Serialize(file, Group.Students);
+                }
             }
             catch (Exception ex)
             {
@@ -25,12 +25,12 @@ namespace LR4_CSH
             }
            
         }
-        public static void DeserializeStudents()
+        public static void DeserializeStudents(string filePath)
         {
             try
             {
                 var jsonDeserializer = new JsonSerializer();
-                using (var file = new StreamReader("students.json"))
+                using (var file = new StreamReader(filePath))
                 {
                     Group.Students = (List<Student>)jsonDeserializer.Deserialize(file, typeof(List<Student>));
                 }
