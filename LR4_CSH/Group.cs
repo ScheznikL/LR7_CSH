@@ -1,20 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LR4_CSH
 {
     class Group
     {
-        public Group(Student student)
-        {
-            //_students.Add(student);
-        }
-        public Group() { }
         public static List<Student> Students { get; set; } = new List<Student>();
         public static List<Person> People { get; set; } = new List<Person>();
         public static List<Subject> Subjects { get; set; } = new List<Subject>();

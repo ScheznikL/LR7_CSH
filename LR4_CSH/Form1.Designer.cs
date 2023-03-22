@@ -75,32 +75,38 @@
             // 
             // BtDeleteChosenSubject
             // 
+            this.BtDeleteChosenSubject.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.BtDeleteChosenSubject.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtDeleteChosenSubject.Location = new System.Drawing.Point(128, 19);
             this.BtDeleteChosenSubject.Name = "BtDeleteChosenSubject";
             this.BtDeleteChosenSubject.Size = new System.Drawing.Size(110, 26);
             this.BtDeleteChosenSubject.TabIndex = 2;
             this.BtDeleteChosenSubject.Text = "Delete Subject";
-            this.BtDeleteChosenSubject.UseVisualStyleBackColor = true;
+            this.BtDeleteChosenSubject.UseVisualStyleBackColor = false;
             this.BtDeleteChosenSubject.Click += new System.EventHandler(this.BtDeleteChosenSubject_Click);
             // 
             // BtCreateNewGroup
             // 
+            this.BtCreateNewGroup.BackColor = System.Drawing.Color.Honeydew;
+            this.BtCreateNewGroup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtCreateNewGroup.Location = new System.Drawing.Point(282, 19);
             this.BtCreateNewGroup.Name = "BtCreateNewGroup";
             this.BtCreateNewGroup.Size = new System.Drawing.Size(75, 26);
             this.BtCreateNewGroup.TabIndex = 1;
             this.BtCreateNewGroup.Text = "Create new";
-            this.BtCreateNewGroup.UseVisualStyleBackColor = true;
+            this.BtCreateNewGroup.UseVisualStyleBackColor = false;
             this.BtCreateNewGroup.Click += new System.EventHandler(this.BtCreateNewGroup_Click);
             // 
             // BtLoadFromFile
             // 
+            this.BtLoadFromFile.BackColor = System.Drawing.Color.LemonChiffon;
+            this.BtLoadFromFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtLoadFromFile.Location = new System.Drawing.Point(6, 19);
             this.BtLoadFromFile.Name = "BtLoadFromFile";
             this.BtLoadFromFile.Size = new System.Drawing.Size(75, 26);
             this.BtLoadFromFile.TabIndex = 0;
             this.BtLoadFromFile.Text = "From File";
-            this.BtLoadFromFile.UseVisualStyleBackColor = true;
+            this.BtLoadFromFile.UseVisualStyleBackColor = false;
             this.BtLoadFromFile.Click += new System.EventHandler(this.BtLoadFromFile_Click);
             // 
             // panel2
@@ -118,6 +124,7 @@
             this.dgvPersons.AllowUserToDeleteRows = false;
             this.dgvPersons.AllowUserToResizeRows = false;
             this.dgvPersons.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvPersons.BackgroundColor = System.Drawing.Color.PapayaWhip;
             this.dgvPersons.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
             this.dataGridViewTextBoxColumn1,
@@ -188,16 +195,19 @@
             // BtSave
             // 
             this.BtSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtSave.BackColor = System.Drawing.Color.Honeydew;
+            this.BtSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtSave.Location = new System.Drawing.Point(499, 317);
             this.BtSave.Name = "BtSave";
             this.BtSave.Size = new System.Drawing.Size(160, 44);
             this.BtSave.TabIndex = 4;
             this.BtSave.Text = "Save";
-            this.BtSave.UseVisualStyleBackColor = true;
+            this.BtSave.UseVisualStyleBackColor = false;
             this.BtSave.Click += new System.EventHandler(this.BtSave_Click);
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.SeaShell;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripMenuItem,
             this.editToolStripMenuItem});
@@ -219,14 +229,14 @@
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveAsToolStripMenuItem.Text = "Save as...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
             // 
             // openFromToolStripMenuItem
             // 
             this.openFromToolStripMenuItem.Name = "openFromToolStripMenuItem";
-            this.openFromToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.openFromToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openFromToolStripMenuItem.Text = "Open from...";
             this.openFromToolStripMenuItem.Click += new System.EventHandler(this.OpenFromToolStripMenuItem_Click);
             // 
@@ -268,7 +278,8 @@
             // BtForSelection
             // 
             this.BtForSelection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.BtForSelection.BackColor = System.Drawing.Color.Transparent;
+            this.BtForSelection.BackColor = System.Drawing.Color.Lavender;
+            this.BtForSelection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtForSelection.Location = new System.Drawing.Point(290, 317);
             this.BtForSelection.Name = "BtForSelection";
             this.BtForSelection.Size = new System.Drawing.Size(160, 44);
@@ -280,6 +291,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(659, 361);
             this.Controls.Add(this.BtSave);
             this.Controls.Add(this.BtForSelection);

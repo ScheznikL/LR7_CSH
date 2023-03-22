@@ -38,10 +38,7 @@ namespace LR4_CSH
                     MessageBox.Show(this, "Now you can edit the grades of a student or add specific subjects for students.",
                     "Add grades",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
-                    BtSave.Visible = true;
-                    BtDeleteChosenSubject.Visible = true;
+                    MessageBoxIcon.Information);                  
                     ClearSelection();
                     panel1.Visible = true;
                 }
@@ -71,7 +68,6 @@ namespace LR4_CSH
             if (Group.Students.Count == 0)
             {
                 panel1.Visible = true;
-                BtDeleteChosenSubject.Visible = true;
                 SerializeJSON.DeserializeStudents(FileDialogOpenSave.FileDialogOpenFrom());       
                 SetBindingsToDisplaySortableList();
                 Group.ToSubjectsFromDeser();
@@ -179,6 +175,7 @@ namespace LR4_CSH
         {
             if (_firstDblCklickFlag)
             {
+                BtSave.Visible = true;
                 BtDeleteChosenSubject.Visible = true;
                 BtSave.Visible = true;
                 BtSave.Dock = DockStyle.None;
@@ -245,6 +242,8 @@ namespace LR4_CSH
             _bsPersonData.ResetBindings(false);
             _bs.ResetBindings(false);
             panel1.Visible = false;
+            BtDeleteChosenSubject.Visible = false;
+            BtForSelection.Text = "";
             dgvPersonalStudData.Visible = false;
         }
         private void ResetStudentsData()
@@ -254,6 +253,8 @@ namespace LR4_CSH
             _bsPersonData.ResetBindings(false);
             _bs.ResetBindings(false);
             panel1.Visible = false;
+            BtForSelection.Text = "";
+            BtDeleteChosenSubject.Visible = false;
             dgvPersonalStudData.Visible = false;
         }
     }
