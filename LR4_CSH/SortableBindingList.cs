@@ -52,9 +52,7 @@ namespace LR4_CSH
             _sortDirection = direction;
 
             if (!(Items is List<T> list)) return;
-
             list.Sort(Compare);
-
             _isSorted = true;
             OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
         }
@@ -71,11 +69,11 @@ namespace LR4_CSH
             object rhsValue = rhs == null ? null : _sortProperty.GetValue(rhs);
             if (lhsValue == null)
             {
-                return (rhsValue == null) ? 0 : -1; //nulls are equal
+                return (rhsValue == null) ? 0 : -1;
             }
             if (rhsValue == null)
             {
-                return 1; //first has value, second doesn't
+                return 1; 
             }
             if (lhsValue is IComparable)
             {
@@ -83,9 +81,8 @@ namespace LR4_CSH
             }
             if (lhsValue.Equals(rhsValue))
             {
-                return 0; //both are the same
+                return 0; 
             }
-            //not comparable, compare ToString
             return lhsValue.ToString().CompareTo(rhsValue.ToString());
         }
     }
