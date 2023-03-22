@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace LR4_CSH
 {
@@ -37,7 +30,6 @@ namespace LR4_CSH
         {
             Subject other = (Subject)this.MemberwiseClone();
             other.Caption = string.Copy(Caption);
-           // other.Grade = uint.Copy(Grade);//???
             return other;
         }
     }

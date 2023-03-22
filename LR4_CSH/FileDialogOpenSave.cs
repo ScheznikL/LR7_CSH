@@ -9,7 +9,7 @@ namespace LR4_CSH
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.InitialDirectory = Application.StartupPath;
-                openFileDialog.Filter = "json files (*.json)|*.json|All files (*.*)|*.*";
+                openFileDialog.Filter = "json files (*.json)|*.json";
                 openFileDialog.FilterIndex = 2;
                 openFileDialog.RestoreDirectory = true;
 

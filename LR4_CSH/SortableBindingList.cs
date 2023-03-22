@@ -46,7 +46,7 @@ namespace LR4_CSH
             _isSorted = false; 
         }
 
-        protected override void ApplySortCore(PropertyDescriptor prop, ListSortDirection direction) //TODO look at msdn
+        protected override void ApplySortCore(PropertyDescriptor prop, ListSortDirection direction)
         {
             _sortProperty = prop;
             _sortDirection = direction;
@@ -56,13 +56,11 @@ namespace LR4_CSH
             list.Sort(Compare);
 
             _isSorted = true;
-            //fire an event that the list has been changed.
             OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
         }
         private int Compare(T lhs, T rhs)
         {
             var result = OnComparison(lhs, rhs);
-            //invert if descending
             if (_sortDirection == ListSortDirection.Descending)
                 result = -result;
             return result;
