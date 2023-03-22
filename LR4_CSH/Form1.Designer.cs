@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.BtDeleteChosenSubject = new System.Windows.Forms.Button();
             this.BtCreateNewGroup = new System.Windows.Forms.Button();
             this.BtLoadFromFile = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -42,14 +43,14 @@
             this.Grade = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BtSave = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFromToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EditstudentsMenuI = new System.Windows.Forms.ToolStripMenuItem();
             this.EditsubjectsMenuI = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.BtForSelection = new System.Windows.Forms.Button();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openFromToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersons)).BeginInit();
@@ -60,6 +61,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.BtDeleteChosenSubject);
             this.groupBox1.Controls.Add(this.BtCreateNewGroup);
             this.groupBox1.Controls.Add(this.BtLoadFromFile);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -70,6 +72,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Secect nessesary group";
+            // 
+            // BtDeleteChosenSubject
+            // 
+            this.BtDeleteChosenSubject.Location = new System.Drawing.Point(128, 19);
+            this.BtDeleteChosenSubject.Name = "BtDeleteChosenSubject";
+            this.BtDeleteChosenSubject.Size = new System.Drawing.Size(110, 26);
+            this.BtDeleteChosenSubject.TabIndex = 2;
+            this.BtDeleteChosenSubject.Text = "Delete Subject";
+            this.BtDeleteChosenSubject.UseVisualStyleBackColor = true;
+            this.BtDeleteChosenSubject.Click += new System.EventHandler(this.BtDeleteChosenSubject_Click);
             // 
             // BtCreateNewGroup
             // 
@@ -119,8 +131,7 @@
             this.dgvPersons.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPersons.Size = new System.Drawing.Size(290, 361);
             this.dgvPersons.TabIndex = 4;
-            this.dgvPersons.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvPersons_MouseClick);
-            this.dgvPersons.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgvPersons_MouseDoubleClick);
+            this.dgvPersons.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvPersons_CellDoubleClick);
             // 
             // Id
             // 
@@ -157,6 +168,7 @@
             this.dgvPersonalStudData.Name = "dgvPersonalStudData";
             this.dgvPersonalStudData.Size = new System.Drawing.Size(369, 231);
             this.dgvPersonalStudData.TabIndex = 3;
+            this.dgvPersonalStudData.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.DgvPersonalStudData_CellValidating);
             // 
             // Subjects
             // 
@@ -194,6 +206,29 @@
             this.menuStrip1.Size = new System.Drawing.Size(369, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveAsToolStripMenuItem,
+            this.openFromToolStripMenuItem});
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.saveToolStripMenuItem.Text = "File";
+            // 
+            // saveAsToolStripMenuItem
+            // 
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.saveAsToolStripMenuItem.Text = "Save as...";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
+            // 
+            // openFromToolStripMenuItem
+            // 
+            this.openFromToolStripMenuItem.Name = "openFromToolStripMenuItem";
+            this.openFromToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.openFromToolStripMenuItem.Text = "Open from...";
+            this.openFromToolStripMenuItem.Click += new System.EventHandler(this.OpenFromToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -241,28 +276,6 @@
             this.BtForSelection.UseVisualStyleBackColor = false;
             this.BtForSelection.Click += new System.EventHandler(this.BtForSelection_Click);
             // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveAsToolStripMenuItem,
-            this.openFromToolStripMenuItem});
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.saveToolStripMenuItem.Text = "File";
-            // 
-            // saveAsToolStripMenuItem
-            // 
-            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.saveAsToolStripMenuItem.Text = "Save as...";
-            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
-            // 
-            // openFromToolStripMenuItem
-            // 
-            this.openFromToolStripMenuItem.Name = "openFromToolStripMenuItem";
-            this.openFromToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.openFromToolStripMenuItem.Text = "Open from...";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -278,7 +291,6 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Students marks";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersons)).EndInit();
@@ -314,6 +326,7 @@
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openFromToolStripMenuItem;
+        private System.Windows.Forms.Button BtDeleteChosenSubject;
     }
 }
 

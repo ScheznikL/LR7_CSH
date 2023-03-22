@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.dGVSubjData = new System.Windows.Forms.DataGridView();
-            this.BtCreate = new System.Windows.Forms.Button();
             this.SubjCaption = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hiddengrades = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BtCreate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dGVSubjData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,17 +48,7 @@
             this.dGVSubjData.Name = "dGVSubjData";
             this.dGVSubjData.Size = new System.Drawing.Size(693, 251);
             this.dGVSubjData.TabIndex = 0;
-            // 
-            // BtCreate
-            // 
-            this.BtCreate.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.BtCreate.Location = new System.Drawing.Point(579, 270);
-            this.BtCreate.Name = "BtCreate";
-            this.BtCreate.Size = new System.Drawing.Size(102, 38);
-            this.BtCreate.TabIndex = 1;
-            this.BtCreate.Text = "Create";
-            this.BtCreate.UseVisualStyleBackColor = true;
-            this.BtCreate.Click += new System.EventHandler(this.BtCreate_Click);
+            this.dGVSubjData.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.DGVSubjData_CellValidating);
             // 
             // SubjCaption
             // 
@@ -72,6 +62,17 @@
             this.hiddengrades.HeaderText = "Grade";
             this.hiddengrades.Name = "hiddengrades";
             this.hiddengrades.Visible = false;
+            // 
+            // BtCreate
+            // 
+            this.BtCreate.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.BtCreate.Location = new System.Drawing.Point(579, 270);
+            this.BtCreate.Name = "BtCreate";
+            this.BtCreate.Size = new System.Drawing.Size(102, 38);
+            this.BtCreate.TabIndex = 1;
+            this.BtCreate.Text = "Create";
+            this.BtCreate.UseVisualStyleBackColor = true;
+            this.BtCreate.Click += new System.EventHandler(this.BtCreate_Click);
             // 
             // DilogSubjects
             // 

@@ -19,7 +19,7 @@ namespace LR4_CSH
             get => _caption;
             set
             {
-                if (value != null) _caption = value;
+                if (value != null) _caption = ValidateUserString.CapitalizeFirstLetter(value);
             }
         }
         public uint Grade { get => _grade; set { if (value != 0) { _grade = value; } } }
@@ -33,7 +33,7 @@ namespace LR4_CSH
             _caption = "";
             _grade = 0;
         }
-        public Subject DeepCopy() //TODO review
+        public Subject DeepCopy()
         {
             Subject other = (Subject)this.MemberwiseClone();
             other.Caption = string.Copy(Caption);

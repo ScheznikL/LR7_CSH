@@ -10,8 +10,21 @@ namespace LR4_CSH
     {
         private string _name;
         private string _lastName;
-        public string Name { get => _name; set { if (value != null) _name = value; } }
-        public string LastName { get => _lastName; set { if (value != null) _lastName = value; } }
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                if (value != null) _name = ValidateUserString.CapitalizeFirstLetter(value);
+            }
+        }
+        public string LastName
+        {
+            get => _lastName; set
+            {
+                if (value != null) _lastName = ValidateUserString.CapitalizeFirstLetter(value);
+            }
+        }
         public Person()
         {
             _name = "";
@@ -19,8 +32,8 @@ namespace LR4_CSH
         }
         public Person(string name, string lastname)
         {
-            _name = name;
-            _lastName = lastname;
+            Name = name;
+            LastName = lastname;
         }
     }
 }

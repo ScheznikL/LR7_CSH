@@ -32,7 +32,7 @@ namespace LR4_CSH
                 {
                     if(sub.Caption == chosensubjname)
                     {
-                        chosenones.Add(stud); // SMALLER?
+                        chosenones.Add(stud);
                     }
                 }                
             }

@@ -15,10 +15,6 @@ namespace LR4_CSH
         public DilogSubjects()
         {
             InitializeComponent();
-
-            // _bs = new BindingSource();
-            //_bs.DataSource = Group.Subjects;
-            //dGVSubjData.DataSource = _bs;
         }
 
         private void BtCreate_Click(object sender, EventArgs e)
@@ -27,8 +23,7 @@ namespace LR4_CSH
             {
                 Group.CreateNewSubjectsList(dGVSubjData.Rows);
                 DialogGroupCreation newDialog = new DialogGroupCreation();
-                // Show testDialog as a modal dialog and determine if DialogResult = OK.
-                if (newDialog.ShowDialog(this) == DialogResult.OK) //BtAddNewData
+                if (newDialog.ShowDialog(this) == DialogResult.OK)
                 {
                     newDialog.Dispose();
                     Dispose();
@@ -52,6 +47,15 @@ namespace LR4_CSH
             _bs = new BindingSource();
             _bs.DataSource = Group.Subjects;
             dGVSubjData.DataSource = _bs;
+        }
+
+        private void DGVSubjData_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {  
+            ValidateUserString.CellValidatingForLetterWithSpases(sender, e, dGVSubjData, out bool isValid);
+            if (!isValid)
+            {
+                dGVSubjData.Rows[e.RowIndex].ErrorText = "Subject name mustn't contain any numbers or sumbols.";
+            }                
         }
     }
 }

@@ -62,6 +62,8 @@
             this.DGVStudData.Name = "DGVStudData";
             this.DGVStudData.Size = new System.Drawing.Size(545, 178);
             this.DGVStudData.TabIndex = 2;
+            this.DGVStudData.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVStudData_CellEndEdit);
+            this.DGVStudData.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.DGVStudData_CellValidating);
             // 
             // ID
             // 

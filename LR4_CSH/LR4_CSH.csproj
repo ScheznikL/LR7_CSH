@@ -103,6 +103,7 @@
     <Compile Include="SortableBindingList.cs" />
     <Compile Include="Students.cs" />
     <Compile Include="Subjects.cs" />
+    <Compile Include="ValidateUserString.cs" />
     <EmbeddedResource Include="DialogChosenStudViaSub.resx">
       <DependentUpon>DialogChosenStudViaSub.cs</DependentUpon>
     </EmbeddedResource>
