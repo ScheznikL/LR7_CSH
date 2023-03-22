@@ -19,7 +19,15 @@ namespace LR4_CSH
         {
             if (!_editFlag)
             {
-                Group.CreateNewGroup(DGVStudData.Rows, nUpDGroupNumber.Value);               
+                if (DGVStudData.Rows.Count <= 1 && DGVStudData.Rows[0].Cells[0].Value == null)
+                {                    
+                    DialogResult = DialogResult.Cancel;
+                    MessageBox.Show("No data to proceed.");
+                }
+                else
+                {
+                    Group.CreateNewGroup(DGVStudData.Rows, nUpDGroupNumber.Value);
+                }
             }
             else
             {
@@ -44,35 +52,35 @@ namespace LR4_CSH
         }
 
         private void DGVStudData_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {            
+        {
             if (e.ColumnIndex != DGVStudData.Columns["ID"].Index)
             {
                 ValidateUserString.CellValidatingForLetterOnly(sender, e, DGVStudData, out bool isValidContent);
                 if (!isValidContent)
                 {
                     DGVStudData.Rows[e.RowIndex].ErrorText = "Names mustn't contain any numbers or sumbols.";
-                }               
+                }
             }
             else
-            {                
+            {
                 ValidateUserString.CellValidatingForDigitOnly(sender, e, DGVStudData, out bool isValid);
                 if (!isValid)
                 {
                     DGVStudData.Rows[e.RowIndex].ErrorText = "ID mustn't contain any characters.";
-                }                
+                }
             }
         }
 
         private void DGVStudData_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.ColumnIndex == DGVStudData.Columns["ID"].Index)
+            if (e.ColumnIndex == DGVStudData.Columns["ID"].Index)
             {
                 ValidateUserString.CellValidatingForUniqness(sender, e, DGVStudData, out bool isUniqeContent);
-                            if (!isUniqeContent)
-                            {
-                                DGVStudData.Rows[e.RowIndex].ErrorText = "Students identification mustn't contain any duplicates.";
-                            }
-            }            
+                if (!isUniqeContent)
+                {
+                    DGVStudData.Rows[e.RowIndex].ErrorText = "Students identification mustn't contain any duplicates.";
+                }
+            }
         }
     }
 }

@@ -21,12 +21,23 @@ namespace LR4_CSH
         {
             if(!flagEdit)
             {
-                Group.CreateNewSubjectsList(dGVSubjData.Rows);
-                DialogGroupCreation newDialog = new DialogGroupCreation();
-                if (newDialog.ShowDialog(this) == DialogResult.OK)
+                if (dGVSubjData.Rows.Count > 1 && dGVSubjData.Rows[0].Cells[0].Value != null)
                 {
-                    newDialog.Dispose();
-                    Dispose();
+                    Group.CreateNewSubjectsList(dGVSubjData.Rows);
+                    DialogGroupCreation newDialog = new DialogGroupCreation();
+                    if (newDialog.ShowDialog(this) == DialogResult.OK)
+                    {
+                        newDialog.Dispose();
+                        Dispose();
+                    }
+                    else
+                    {
+                        DialogResult = DialogResult.Cancel;
+                    }
+                }
+                else
+                {
+                    DialogResult = DialogResult.Cancel;
                 }
             }
             else
