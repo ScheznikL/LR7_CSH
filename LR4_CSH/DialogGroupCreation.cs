@@ -50,7 +50,6 @@ namespace LR4_CSH
         {
             DGVStudData.Rows.Remove(DGVStudData.CurrentRow);
         }
-
         private void DGVStudData_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             if (e.ColumnIndex != DGVStudData.Columns["ID"].Index)
@@ -70,7 +69,6 @@ namespace LR4_CSH
                 }
             }
         }
-
         private void DGVStudData_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == DGVStudData.Columns["ID"].Index)

@@ -28,7 +28,7 @@ namespace LR4_CSH
         }
         public Subject DeepCopy()
         {
-            Subject other = (Subject)this.MemberwiseClone();
+            Subject other = (Subject)MemberwiseClone();
             other.Caption = string.Copy(Caption);
             return other;
         }

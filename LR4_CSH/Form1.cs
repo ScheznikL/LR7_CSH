@@ -9,8 +9,8 @@ namespace LR4_CSH
 {
     public partial class Form1 : Form
     {
-        private BindingSource _bs, _bsPersonData;
-        private BindingList<Subject> _bindSublist;
+        private BindingSource _bsForSubjects, _bsPersonData;
+        private BindingList<Subject> _subjBindList;
         private bool _firstDblCklickFlag = true;
 
         public Form1()
@@ -24,9 +24,9 @@ namespace LR4_CSH
             dgvPersonalStudData.ReadOnly = true;
             dgvPersonalStudData.Visible = false;
             panel1.Visible = false;
-            _bs = new BindingSource();
+            _bsForSubjects = new BindingSource();
             _bsPersonData = new BindingSource();
-            _bindSublist = new BindingList<Subject>();
+            _subjBindList = new BindingList<Subject>();
         }
         private void BtCreateNewGroup_Click(object sender, EventArgs e)
         {
@@ -38,7 +38,7 @@ namespace LR4_CSH
                     MessageBox.Show(this, "Now you can edit the grades of a student or add specific subjects for students.",
                     "Add grades",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);                  
+                    MessageBoxIcon.Information);
                     ClearSelection();
                     panel1.Visible = true;
                 }
@@ -68,7 +68,7 @@ namespace LR4_CSH
             if (Group.Students.Count == 0)
             {
                 panel1.Visible = true;
-                SerializeJSON.DeserializeStudents(FileDialogOpenSave.FileDialogOpenFrom());       
+                SerializeJSON.DeserializeStudents(FileDialogOpenSave.FileDialogOpenFrom());
                 SetBindingsToDisplaySortableList();
                 Group.ToSubjectsFromDeser();
             }
@@ -96,15 +96,15 @@ namespace LR4_CSH
             SortableBindingList<Student> sortableStuds = new SortableBindingList<Student>(Group.Students);
             _bsPersonData.DataSource = sortableStuds;
             dgvPersons.DataSource = _bsPersonData;
-            dgvPersonalStudData.DataSource = _bs;
+            dgvPersonalStudData.DataSource = _bsForSubjects;
         }
         private void DgvPersons_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             dgvPersonalStudData.Visible = true;
 
-            if (_bindSublist.Count > 0)
+            if (_subjBindList.Count > 0)
             {
-                _bindSublist.Clear();
+                _subjBindList.Clear();
             }
             if (dgvPersonalStudData.ReadOnly)
             {
@@ -113,10 +113,10 @@ namespace LR4_CSH
             var chosenstud = _bsPersonData.Current as Student;
             foreach (var sub in chosenstud.Subjects)
             {
-                _bindSublist.Add(sub);
+                _subjBindList.Add(sub);
             }
-            _bs.DataSource = _bindSublist;
-            _bs.ResetBindings(false);
+            _bsForSubjects.DataSource = _subjBindList;
+            _bsForSubjects.ResetBindings(false);
             ForSelectionEnable();
             _firstDblCklickFlag = false;
         }
@@ -128,7 +128,7 @@ namespace LR4_CSH
                 var chosenlist = _bsPersonData.Current as Student;
                 foreach (var stud in Group.Students.Where(x => x.Id == chosenlist.Id))
                 {
-                    stud.Subjects = _bindSublist.ToList();
+                    stud.Subjects = _subjBindList.ToList();
                 }
             }
         }
@@ -180,13 +180,13 @@ namespace LR4_CSH
                 BtSave.Visible = true;
                 BtSave.Dock = DockStyle.None;
                 BtForSelection.Visible = true;
-                BtForSelection.DataBindings.Add("Text", _bs, "Caption");
+                BtForSelection.DataBindings.Add("Text", _bsForSubjects, "Caption");
             }
         }
         private void BtForSelection_Click(object sender, EventArgs e)
         {
             DialogChosenStudViaSub newDialog = new DialogChosenStudViaSub();
-            newDialog.ProperShowTitle((_bs.Current as Subject).Caption);
+            newDialog.ProperShowTitle((_bsForSubjects.Current as Subject).Caption);
             if (newDialog.ShowDialog(this) == DialogResult.OK)
             {
                 newDialog.Dispose();
@@ -240,7 +240,7 @@ namespace LR4_CSH
             Group.Students.Clear();
             Group.Subjects.Clear();
             _bsPersonData.ResetBindings(false);
-            _bs.ResetBindings(false);
+            _bsForSubjects.ResetBindings(false);
             panel1.Visible = false;
             BtDeleteChosenSubject.Visible = false;
             BtForSelection.Text = "";
@@ -251,7 +251,7 @@ namespace LR4_CSH
             Group.Students.Clear();
             Group.Subjects.Clear();
             _bsPersonData.ResetBindings(false);
-            _bs.ResetBindings(false);
+            _bsForSubjects.ResetBindings(false);
             panel1.Visible = false;
             BtForSelection.Text = "";
             BtDeleteChosenSubject.Visible = false;

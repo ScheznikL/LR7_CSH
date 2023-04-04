@@ -145,7 +145,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DilogForms\" />
     <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>

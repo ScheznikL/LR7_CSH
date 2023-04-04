@@ -7,12 +7,13 @@ using Newtonsoft.Json;
 namespace LR4_CSH
 {
     static class SerializeJSON
-    {      
+    {
         public static void SerializeStudents(string path)
         {
+            if (string.IsNullOrEmpty(path)) return;
             try
             {
-             var jsonSerializer = new JsonSerializer();
+                var jsonSerializer = new JsonSerializer();
                 using (var file = new StreamWriter(path))
                 {
                     jsonSerializer.Serialize(file, Group.Students);
@@ -23,10 +24,11 @@ namespace LR4_CSH
                 Form1 owner = new Form1();
                 MessageBox.Show(owner, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-           
+
         }
         public static void DeserializeStudents(string filePath)
         {
+            if (string.IsNullOrEmpty(filePath)) return;
             try
             {
                 var jsonDeserializer = new JsonSerializer();

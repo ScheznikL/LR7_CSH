@@ -33,14 +33,13 @@ namespace LR4_CSH
             saveFileDialog1.RestoreDirectory = true;
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
+            {               
                 MessageBox.Show($"File will be saved to {saveFileDialog1.FileName}");
                 return saveFileDialog1.FileName;
             }
             else
             {
-                MessageBox.Show($"File wiil be saved to {Application.StartupPath} studentsOfGroup {Group.Groupnumber}");
-                return Application.StartupPath + $"studentsOfGroup{Group.Groupnumber}.json"; ;
+                return "";
             }
         }
     }
