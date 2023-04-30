@@ -1,4 +1,4 @@
-﻿namespace LR4_CSH
+﻿namespace LR7_CSH
 {
     partial class DialogChosenStudViaSub
     {

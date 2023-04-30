@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LR4_CSH
+namespace LR7_CSH
 {
     public partial class DialogStudList : Form
     {

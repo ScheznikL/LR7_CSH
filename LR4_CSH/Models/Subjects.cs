@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LR4_CSH
+namespace LR7_CSH
 {
     class Subject 
     {

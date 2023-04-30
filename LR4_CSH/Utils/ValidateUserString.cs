@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
 
-namespace LR4_CSH
+namespace LR7_CSH
 {
     class ValidateUserString
     {

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LR4_CSH.Properties
+namespace LR7_CSH.Properties
 {
 
 

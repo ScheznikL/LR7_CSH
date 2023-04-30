@@ -4,7 +4,7 @@ using System.IO;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 
-namespace LR4_CSH
+namespace LR7_CSH
 {
     static class SerializeJSON
     {

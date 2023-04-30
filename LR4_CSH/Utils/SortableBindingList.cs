@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace LR4_CSH
+namespace LR7_CSH
 {
     public class SortableBindingList<T> : BindingList<T> where T : class
     {

@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace LR4_CSH
+namespace LR7_CSH
 {
     public partial class DialogChosenStudViaSub : Form
     {

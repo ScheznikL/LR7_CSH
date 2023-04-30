@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LR4_CSH
+namespace LR7_CSH
 {
     class Student : Person
     {
