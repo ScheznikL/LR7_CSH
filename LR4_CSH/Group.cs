@@ -57,12 +57,20 @@ namespace LR7_CSH
                 stud.Subjects = Subjects.ConvertAll(y => y.DeepCopy());
             }
         }
-        public static void ToSubjectsFromDeser()
+        public static void ToSubjectsFromFile()
         {
-            FindCommonSubjectsFromStudents(out List<string> sub);
-            foreach (var subj in sub)
+            Groupnumber = Students[0].Groupnumber;
+            if (Students.Count > 1)
             {
-                Subjects.Add(new Subject() { Caption = subj });
+                FindCommonSubjectsFromStudents(out List<string> sub);
+                foreach (var subj in sub)
+                {
+                    Subjects.Add(new Subject() { Caption = subj });
+                }
+            }
+            else
+            {
+                Subjects = Students[0].Subjects;
             }
         }
         private static void FindCommonSubjectsFromStudents(out List<string> sub)

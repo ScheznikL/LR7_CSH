@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace LR7_CSH
@@ -7,6 +8,7 @@ namespace LR7_CSH
     {
         private bool _editFlag = false;
         private BindingSource _bsGroupData;
+        private List<string> _listOfChangedStudentID = new List<string>();
         public DialogGroupCreation()
         {
             InitializeComponent();
@@ -20,7 +22,7 @@ namespace LR7_CSH
             if (!_editFlag)
             {
                 if (DGVStudData.Rows.Count <= 1 && DGVStudData.Rows[0].Cells[0].Value == null)
-                {                    
+                {
                     DialogResult = DialogResult.Cancel;
                     MessageBox.Show("No data to proceed.");
                 }
@@ -32,6 +34,12 @@ namespace LR7_CSH
             else
             {
                 Group.EditStudentList();
+                if (MessageBox.Show("Whould you like to save a new/changed data to Student database?", "",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    StudentsSubjDBA.UpdateStudentDataBase(_listOfChangedStudentID);
+                }
             }
         }
         public void FromStudentEdit()
@@ -66,6 +74,20 @@ namespace LR7_CSH
                 if (!isValid)
                 {
                     DGVStudData.Rows[e.RowIndex].ErrorText = "ID mustn't contain any characters.";
+                }
+            }
+            var cell = DGVStudData.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            if (cell.IsInEditMode && _editFlag)
+            {
+                string currentValue = cell.Value == null ? string.Empty : cell.Value.ToString();
+                string editedValue = e.FormattedValue == null ? string.Empty : e.FormattedValue.ToString();
+                if (currentValue != editedValue)
+                {
+                    var chosenstud = _bsGroupData.Current as Student;
+                    if (!_listOfChangedStudentID.Contains(chosenstud.Id))
+                    {
+                        _listOfChangedStudentID.Add(chosenstud.Id);
+                    }
                 }
             }
         }

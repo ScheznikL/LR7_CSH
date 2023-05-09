@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.1738
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LR7_CSH", "LR4_CSH\LR7_CSH.csproj", "{AC906666-CACC-40EE-91D4-4973897DFF5B}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "StudentSubjectDB", "StudentSubjectDB\StudentSubjectDB.sqlproj", "{D152488A-F5FA-4F7E-AB17-E9A9B6528DA8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,12 @@ Global
 		{AC906666-CACC-40EE-91D4-4973897DFF5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC906666-CACC-40EE-91D4-4973897DFF5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC906666-CACC-40EE-91D4-4973897DFF5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D152488A-F5FA-4F7E-AB17-E9A9B6528DA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D152488A-F5FA-4F7E-AB17-E9A9B6528DA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D152488A-F5FA-4F7E-AB17-E9A9B6528DA8}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D152488A-F5FA-4F7E-AB17-E9A9B6528DA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D152488A-F5FA-4F7E-AB17-E9A9B6528DA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D152488A-F5FA-4F7E-AB17-E9A9B6528DA8}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

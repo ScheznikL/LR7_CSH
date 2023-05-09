@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{AC906666-CACC-40EE-91D4-4973897DFF5B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>LR4_CSH</RootNamespace>
-    <AssemblyName>LR4_CSH</AssemblyName>
+    <RootNamespace>LR7_CSH</RootNamespace>
+    <AssemblyName>LR7_CSH</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -64,6 +64,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\SubjectStatus.cs" />
+    <Compile Include="Utils\FileReader.cs" />
+    <Compile Include="Utils\StudentsSubjDBA.cs" />
     <Compile Include="View\DialogChosenStudViaSub.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,10 +130,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\Student.datasource" />
-    <None Include="Properties\DataSources\Subject.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -146,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
+    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">

@@ -32,7 +32,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.BtDeleteChosenSubject = new System.Windows.Forms.Button();
             this.BtCreateNewGroup = new System.Windows.Forms.Button();
-            this.BtLoadFromFile = new System.Windows.Forms.Button();
+            this.BtLoadFromDB = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgvPersons = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,9 +46,13 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFromToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.jSONToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EditstudentsMenuI = new System.Windows.Forms.ToolStripMenuItem();
             this.EditsubjectsMenuI = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.BtForSelection = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -63,7 +67,7 @@
             // 
             this.groupBox1.Controls.Add(this.BtDeleteChosenSubject);
             this.groupBox1.Controls.Add(this.BtCreateNewGroup);
-            this.groupBox1.Controls.Add(this.BtLoadFromFile);
+            this.groupBox1.Controls.Add(this.BtLoadFromDB);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(290, 24);
             this.groupBox1.Name = "groupBox1";
@@ -97,17 +101,17 @@
             this.BtCreateNewGroup.UseVisualStyleBackColor = false;
             this.BtCreateNewGroup.Click += new System.EventHandler(this.BtCreateNewGroup_Click);
             // 
-            // BtLoadFromFile
+            // BtLoadFromDB
             // 
-            this.BtLoadFromFile.BackColor = System.Drawing.Color.LemonChiffon;
-            this.BtLoadFromFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtLoadFromFile.Location = new System.Drawing.Point(6, 19);
-            this.BtLoadFromFile.Name = "BtLoadFromFile";
-            this.BtLoadFromFile.Size = new System.Drawing.Size(75, 26);
-            this.BtLoadFromFile.TabIndex = 0;
-            this.BtLoadFromFile.Text = "From File";
-            this.BtLoadFromFile.UseVisualStyleBackColor = false;
-            this.BtLoadFromFile.Click += new System.EventHandler(this.BtLoadFromFile_Click);
+            this.BtLoadFromDB.BackColor = System.Drawing.Color.LemonChiffon;
+            this.BtLoadFromDB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtLoadFromDB.Location = new System.Drawing.Point(6, 19);
+            this.BtLoadFromDB.Name = "BtLoadFromDB";
+            this.BtLoadFromDB.Size = new System.Drawing.Size(75, 26);
+            this.BtLoadFromDB.TabIndex = 0;
+            this.BtLoadFromDB.Text = "From DB";
+            this.BtLoadFromDB.UseVisualStyleBackColor = false;
+            this.BtLoadFromDB.Click += new System.EventHandler(this.BtLoadFromDB_Click);
             // 
             // panel2
             // 
@@ -210,7 +214,8 @@
             this.menuStrip1.BackColor = System.Drawing.Color.SeaShell;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripMenuItem,
-            this.editToolStripMenuItem});
+            this.editToolStripMenuItem,
+            this.clearDBToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(290, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(369, 24);
@@ -221,7 +226,8 @@
             // 
             this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveAsToolStripMenuItem,
-            this.openFromToolStripMenuItem});
+            this.openFromToolStripMenuItem,
+            this.saveToDBToolStripMenuItem});
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.saveToolStripMenuItem.Text = "File";
@@ -229,16 +235,39 @@
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.saveAsToolStripMenuItem.Text = "Save as...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
             // 
             // openFromToolStripMenuItem
             // 
             this.openFromToolStripMenuItem.Name = "openFromToolStripMenuItem";
-            this.openFromToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.openFromToolStripMenuItem.Text = "Open from...";
+            this.openFromToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.openFromToolStripMenuItem.Text = "Open from JSON";
             this.openFromToolStripMenuItem.Click += new System.EventHandler(this.OpenFromToolStripMenuItem_Click);
+            // 
+            // saveToDBToolStripMenuItem
+            // 
+            this.saveToDBToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.jSONToolStripMenuItem,
+            this.sessionToolStripMenuItem});
+            this.saveToDBToolStripMenuItem.Name = "saveToDBToolStripMenuItem";
+            this.saveToDBToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.saveToDBToolStripMenuItem.Text = "Save to DB";
+            // 
+            // jSONToolStripMenuItem
+            // 
+            this.jSONToolStripMenuItem.Name = "jSONToolStripMenuItem";
+            this.jSONToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.jSONToolStripMenuItem.Text = "JSON";
+            this.jSONToolStripMenuItem.Click += new System.EventHandler(this.jSONToolStripMenuItem_Click);
+            // 
+            // sessionToolStripMenuItem
+            // 
+            this.sessionToolStripMenuItem.Name = "sessionToolStripMenuItem";
+            this.sessionToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.sessionToolStripMenuItem.Text = "Session";
+            this.sessionToolStripMenuItem.Click += new System.EventHandler(this.sessionToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -262,6 +291,13 @@
             this.EditsubjectsMenuI.Size = new System.Drawing.Size(143, 22);
             this.EditsubjectsMenuI.Text = "Add Subjects";
             this.EditsubjectsMenuI.Click += new System.EventHandler(this.EditsubjectsMenuI_Click);
+            // 
+            // clearDBToolStripMenuItem
+            // 
+            this.clearDBToolStripMenuItem.Name = "clearDBToolStripMenuItem";
+            this.clearDBToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.clearDBToolStripMenuItem.Text = "ClearDB";
+            this.clearDBToolStripMenuItem.Click += new System.EventHandler(this.clearDBToolStripMenuItem_Click);
             // 
             // panel1
             // 
@@ -319,7 +355,7 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button BtCreateNewGroup;
-        private System.Windows.Forms.Button BtLoadFromFile;
+        private System.Windows.Forms.Button BtLoadFromDB;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView dgvPersonalStudData;
         private System.Windows.Forms.DataGridView dgvPersons;
@@ -339,6 +375,10 @@
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openFromToolStripMenuItem;
         private System.Windows.Forms.Button BtDeleteChosenSubject;
+        private System.Windows.Forms.ToolStripMenuItem saveToDBToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem jSONToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sessionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearDBToolStripMenuItem;
     }
 }
 

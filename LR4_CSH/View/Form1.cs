@@ -12,6 +12,9 @@ namespace LR7_CSH
         private BindingSource _bsForSubjects, _bsPersonData;
         private BindingList<Subject> _subjBindList;
         private bool _firstDblCklickFlag = true;
+        private bool changingGradeOnExistingSub = false;
+        private bool addingNewSubj = false;
+        private bool subjectNameWasEddited;
 
         public Form1()
         {
@@ -63,33 +66,15 @@ namespace LR7_CSH
                 }
             }
         }
-        private void BtLoadFromFile_Click(object sender, EventArgs e)
+        private void BtLoadFromDB_Click(object sender, EventArgs e)
         {
-            if (Group.Students.Count == 0)
+            if (StudentsSubjDBA.LoadData())
             {
                 panel1.Visible = true;
-                SerializeJSON.DeserializeStudents(FileDialogOpenSave.FileDialogOpenFrom());
                 SetBindingsToDisplaySortableList();
-                Group.ToSubjectsFromDeser();
+                Group.ToSubjectsFromFile();
+                BtLoadFromDB.Enabled = false;
             }
-            else
-            {
-                if (
-                MessageBox.Show(this, "Whould you like to save current list to file?",
-                   "Save",
-                   MessageBoxButtons.YesNo,
-                   MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    SaveAndResetStudentsData();
-                    BtLoadFromFile_Click(sender, e);
-                }
-                else
-                {
-                    ResetStudentsData();
-                    BtLoadFromFile_Click(sender, e);
-                }
-            }
-
         }
         private void SetBindingsToDisplaySortableList()
         {
@@ -122,15 +107,32 @@ namespace LR7_CSH
         }
         private void BtSave_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(this, "Whould you like to save your changes?", "Save",
+            var chosenlist = _bsPersonData.Current as Student;
+            if (MessageBox.Show("Whould you like to save your changes?", "Save",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                var chosenlist = _bsPersonData.Current as Student;
                 foreach (var stud in Group.Students.Where(x => x.Id == chosenlist.Id))
                 {
                     stud.Subjects = _subjBindList.ToList();
                 }
             }
+            if (MessageBox.Show("Whould you like to save your changes to Data Base?", "Save to DB",
+                               MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (changingGradeOnExistingSub)
+                {                    
+                    StudentsSubjDBA.UpdateSubjectsDBModifyGrade(Convert.ToInt32(chosenlist.Id));
+                }
+                else if (addingNewSubj)
+                {
+                    StudentsSubjDBA.SubjectsDBAddSubject(Convert.ToInt32(chosenlist.Id));
+                }
+                if (subjectNameWasEddited)
+                {
+                    StudentsSubjDBA.UpdateSubjectsDBModifyName(Convert.ToInt32(chosenlist.Id));
+                }
+            }
+
         }
         private void EditsubjectsMenuI_Click(object sender, EventArgs e)
         {
@@ -194,6 +196,8 @@ namespace LR7_CSH
         }
         private void BtDeleteChosenSubject_Click(object sender, EventArgs e)
         {
+            StudentsSubjDBA.SubjectsDBDeleteSubject(dgvPersons.CurrentRow.Cells["Id"].Value,
+                _bsForSubjects.Current as Subject);
             dgvPersonalStudData.Rows.Remove(dgvPersonalStudData.CurrentRow);
         }
         private void ClearSelection()
@@ -210,16 +214,63 @@ namespace LR7_CSH
                 SaveAndResetStudentsData();
             }
         }
+        private void jSONToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (StudentsSubjDBA.SaveDataFromJSON())
+            {
+                MessageBox.Show("File saved to Students data base", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        private void sessionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Group.Students.Count > 0)
+            {
+                if (!StudentsSubjDBA.SaveDataFromCurrentSession())
+                {
+                    MessageBox.Show("Saving failed", "Error");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Student list is empty", "Error");
+            }
+            // TODO Block this "button"
+        }
         private void OpenFromToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BtLoadFromFile_Click(sender, e);
+            if (Group.Students.Count == 0)
+            {
+                panel1.Visible = true;
+                SerializeJSON.DeserializeStudents(FileDialogOpenSave.FileDialogOpenFrom());
+                SetBindingsToDisplaySortableList();
+                Group.ToSubjectsFromFile();
+            }
+            else
+            {
+                if (
+                MessageBox.Show(this, "Whould you like to save current list to file?",
+                   "Save",
+                   MessageBoxButtons.YesNo,
+                   MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    SaveAndResetStudentsData();
+                    OpenFromToolStripMenuItem_Click(sender, e);
+                }
+                else
+                {
+                    ResetStudentsData();
+                    OpenFromToolStripMenuItem_Click(sender, e);
+                }
+            }
         }
         private void DgvPersonalStudData_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            bool isValid;
+            var currentCell = dgvPersonalStudData.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            var currentValue = currentCell.Value == null ? string.Empty : currentCell.Value.ToString();
+            var editedValue = e.FormattedValue == null ? string.Empty : e.FormattedValue.ToString();
             if (e.ColumnIndex != dgvPersonalStudData.Columns["Grade"].Index)
             {
-                ValidateUserString.CellValidatingForLetterWithSpases(sender, e, dgvPersonalStudData, out isValid);
+                ValidateUserString.CellValidatingForLetterWithSpases(sender, e, dgvPersonalStudData, out bool isValid);
                 if (!isValid)
                 {
                     dgvPersonalStudData.Rows[e.RowIndex].ErrorText = "Subject name mustn't contain any numbers or sumbols.";
@@ -227,10 +278,33 @@ namespace LR7_CSH
             }
             else
             {
-                ValidateUserString.CellValidatingForDigitOnly(sender, e, dgvPersonalStudData, out isValid);
+                ValidateUserString.CellValidatingForDigitOnly(sender, e, dgvPersonalStudData, out bool isValid);
                 if (!isValid)
                 {
                     dgvPersonalStudData.Rows[e.RowIndex].ErrorText = "Grade cannot contain any characters.";
+                }
+            }          
+            if (currentCell.IsInEditMode && e.ColumnIndex == dgvPersonalStudData.Columns["Grade"].Index)
+            {
+                changingGradeOnExistingSub = false;
+                if (currentValue != editedValue && currentValue != "0")
+                {
+                    changingGradeOnExistingSub = true;
+                    StudentsSubjDBA.ListOfChangesSubs.Add(new SubjectStatus(_bsForSubjects.Current as Subject,"ForGrade"));
+                }
+                else
+                {
+                    addingNewSubj = true;
+                    StudentsSubjDBA.ListOfChangesSubs.Add(new SubjectStatus(_bsForSubjects.Current as Subject,"NewSub"));                    
+                }
+            }
+            else if (e.ColumnIndex == dgvPersonalStudData.Columns["Subjects"].Index)
+            {
+                if (currentValue != editedValue)
+                {
+                    StudentsSubjDBA.ListOfChangesSubs.Add(new SubjectStatus(_bsForSubjects.Current as Subject,
+                        currentValue, editedValue));
+                    subjectNameWasEddited = true;
                 }
             }
         }
@@ -245,6 +319,22 @@ namespace LR7_CSH
             BtDeleteChosenSubject.Visible = false;
             BtForSelection.Text = "";
             dgvPersonalStudData.Visible = false;
+        }
+        private void clearDBToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are sure want to delete all data from Students DB?", "?",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (StudentsSubjDBA.ClearDataBase())
+                {
+                    MessageBox.Show("All data deleted succesfully.");
+                }
+                else
+                {
+                    MessageBox.Show("Clearing failed.");
+                }
+            }
         }
         private void ResetStudentsData()
         {
