@@ -17,8 +17,7 @@ namespace LR7_CSH
             using (SqlConnection connection = new SqlConnection(_connectionStr))
             {
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = /*@"DELETE FROM Students_has_Subjects;"*/
-                                    @"DELETE FROM Students;
+                cmd.CommandText = @"DELETE FROM Students;
                                         DBCC CHECKIDENT('Students', RESEED, 0)
                                     DELETE FROM SubjectsHold;
                                     DELETE FROM Subjects; 
@@ -44,8 +43,6 @@ namespace LR7_CSH
                 var cmd = connection.CreateCommand();
                 cmd.CommandText = "dbo.uspInsertFromJSON";
                 cmd.CommandType = CommandType.StoredProcedure;
-                //cmd.Parameters.Add(new SqlParameter("@jsonData", SqlDbType.NVarChar,-1));
-                //cmd.Parameters["@jsonData"].Value = FileReader.ReadFromJSON();
                 cmd.Parameters.Add("@jsonData", SqlDbType.NVarChar, -1).Value = FileReader.ReadFromJSON();
                 using (SqlCommand sqlCommand = new SqlCommand("Select COUNT(*) From Students", connection))
                 {
@@ -253,21 +250,6 @@ namespace LR7_CSH
             }
             return true;
         }
-
-        public static bool IsDBEmpty()
-        {
-            bool status = true;
-            using (SqlConnection connection = new SqlConnection(_connectionStr))
-            {
-                SqlCommand command = new SqlCommand(
-                   "SELECT * FROM Students;", connection);
-                connection.Open();
-                var reader = command.ExecuteReader();
-                if (reader.HasRows) status = false;
-            }
-            return status;
-        }
-
         public static bool UpdateStudentDataBase(IEnumerable<string> idOfChangedStudents)
         {
             var group = Group.Groupnumber;
@@ -303,6 +285,46 @@ namespace LR7_CSH
                 MessageBox.Show("DB is empty.");
             }
 
+            return true;
+        }
+        public static bool StudentDBAddStudents(IEnumerable<Student> AddedStudents)
+        {
+            if (!IsDBEmpty())
+            {
+                using (SqlConnection connection = new SqlConnection(_connectionStr))
+                {
+                    connection.Open();
+                    foreach (var student in AddedStudents)
+                    {
+                        using (SqlCommand sqlCommand = new SqlCommand("dbo.uspNewStudent", connection))
+                        {
+                            sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                            sqlCommand.Parameters.Add(new SqlParameter("@given_id", SqlDbType.Int));
+                            sqlCommand.Parameters["@given_id"].Value = student.Id;
+                            sqlCommand.Parameters.Add(new SqlParameter("@group_number", SqlDbType.Real));
+                            sqlCommand.Parameters["@group_number"].Value = student.Groupnumber;
+                            sqlCommand.Parameters.Add(new SqlParameter("@name", SqlDbType.VarChar, 20));
+                            sqlCommand.Parameters["@name"].Value = student.Name;
+                            sqlCommand.Parameters.Add(new SqlParameter("@lastname", SqlDbType.VarChar, 45));
+                            sqlCommand.Parameters["@lastname"].Value = student.LastName;
+                            try
+                            {
+                                sqlCommand.ExecuteNonQuery();
+                            }
+                            catch (Exception e)
+                            {
+                                MessageBox.Show(e.Message, "Error");
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("DB is empty.");
+            }
             return true;
         }
         public static bool UpdateSubjectsDBModifyGrade(int id)
@@ -478,6 +500,18 @@ namespace LR7_CSH
             }
 
         }
-
+        public static bool IsDBEmpty()
+        {
+            bool status = true;
+            using (SqlConnection connection = new SqlConnection(_connectionStr))
+            {
+                SqlCommand command = new SqlCommand(
+                   "SELECT * FROM Students;", connection);
+                connection.Open();
+                var reader = command.ExecuteReader();
+                if (reader.HasRows) status = false;
+            }
+            return status;
+        }
     }
 }

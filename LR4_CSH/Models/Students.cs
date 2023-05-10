@@ -24,7 +24,7 @@ namespace LR7_CSH
         }
 
         public Student() : base() { }
-        public Student(string name, string lastName, string surname, uint group, List<Subject> subjects) : base(name, lastName)
+        public Student(string name, string lastName, uint group, List<Subject> subjects) : base(name, lastName)
         {
             Groupnumber = group;
             Subjects = subjects;

@@ -235,14 +235,14 @@
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveAsToolStripMenuItem.Text = "Save as...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
             // 
             // openFromToolStripMenuItem
             // 
             this.openFromToolStripMenuItem.Name = "openFromToolStripMenuItem";
-            this.openFromToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.openFromToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openFromToolStripMenuItem.Text = "Open from JSON";
             this.openFromToolStripMenuItem.Click += new System.EventHandler(this.OpenFromToolStripMenuItem_Click);
             // 
@@ -252,22 +252,22 @@
             this.jSONToolStripMenuItem,
             this.sessionToolStripMenuItem});
             this.saveToDBToolStripMenuItem.Name = "saveToDBToolStripMenuItem";
-            this.saveToDBToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.saveToDBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToDBToolStripMenuItem.Text = "Save to DB";
             // 
             // jSONToolStripMenuItem
             // 
             this.jSONToolStripMenuItem.Name = "jSONToolStripMenuItem";
-            this.jSONToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.jSONToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.jSONToolStripMenuItem.Text = "JSON";
-            this.jSONToolStripMenuItem.Click += new System.EventHandler(this.jSONToolStripMenuItem_Click);
+            this.jSONToolStripMenuItem.Click += new System.EventHandler(this.JSONToolStripMenuItem_Click);
             // 
             // sessionToolStripMenuItem
             // 
             this.sessionToolStripMenuItem.Name = "sessionToolStripMenuItem";
-            this.sessionToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.sessionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sessionToolStripMenuItem.Text = "Session";
-            this.sessionToolStripMenuItem.Click += new System.EventHandler(this.sessionToolStripMenuItem_Click);
+            this.sessionToolStripMenuItem.Click += new System.EventHandler(this.SessionToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -297,7 +297,7 @@
             this.clearDBToolStripMenuItem.Name = "clearDBToolStripMenuItem";
             this.clearDBToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.clearDBToolStripMenuItem.Text = "ClearDB";
-            this.clearDBToolStripMenuItem.Click += new System.EventHandler(this.clearDBToolStripMenuItem_Click);
+            this.clearDBToolStripMenuItem.Click += new System.EventHandler(this.ClearDBToolStripMenuItem_Click);
             // 
             // panel1
             // 

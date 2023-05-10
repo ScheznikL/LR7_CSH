@@ -4,7 +4,6 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-
 namespace LR7_CSH
 {
     public partial class Form1 : Form
@@ -12,9 +11,9 @@ namespace LR7_CSH
         private BindingSource _bsForSubjects, _bsPersonData;
         private BindingList<Subject> _subjBindList;
         private bool _firstDblCklickFlag = true;
-        private bool changingGradeOnExistingSub = false;
-        private bool addingNewSubj = false;
-        private bool subjectNameWasEddited;
+        private bool _changingGradeOnExistingSub = false;
+        private bool _addingNewSubj = false;
+        private bool _subjectNameWasEddited;
 
         public Form1()
         {
@@ -119,15 +118,15 @@ namespace LR7_CSH
             if (MessageBox.Show("Whould you like to save your changes to Data Base?", "Save to DB",
                                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                if (changingGradeOnExistingSub)
+                if (_changingGradeOnExistingSub)
                 {                    
                     StudentsSubjDBA.UpdateSubjectsDBModifyGrade(Convert.ToInt32(chosenlist.Id));
                 }
-                else if (addingNewSubj)
+                else if (_addingNewSubj)
                 {
                     StudentsSubjDBA.SubjectsDBAddSubject(Convert.ToInt32(chosenlist.Id));
                 }
-                if (subjectNameWasEddited)
+                if (_subjectNameWasEddited)
                 {
                     StudentsSubjDBA.UpdateSubjectsDBModifyName(Convert.ToInt32(chosenlist.Id));
                 }
@@ -214,14 +213,14 @@ namespace LR7_CSH
                 SaveAndResetStudentsData();
             }
         }
-        private void jSONToolStripMenuItem_Click(object sender, EventArgs e)
+        private void JSONToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (StudentsSubjDBA.SaveDataFromJSON())
             {
                 MessageBox.Show("File saved to Students data base", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        private void sessionToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SessionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Group.Students.Count > 0)
             {
@@ -286,15 +285,15 @@ namespace LR7_CSH
             }          
             if (currentCell.IsInEditMode && e.ColumnIndex == dgvPersonalStudData.Columns["Grade"].Index)
             {
-                changingGradeOnExistingSub = false;
+                _changingGradeOnExistingSub = false;
                 if (currentValue != editedValue && currentValue != "0")
                 {
-                    changingGradeOnExistingSub = true;
+                    _changingGradeOnExistingSub = true;
                     StudentsSubjDBA.ListOfChangesSubs.Add(new SubjectStatus(_bsForSubjects.Current as Subject,"ForGrade"));
                 }
                 else
                 {
-                    addingNewSubj = true;
+                    _addingNewSubj = true;
                     StudentsSubjDBA.ListOfChangesSubs.Add(new SubjectStatus(_bsForSubjects.Current as Subject,"NewSub"));                    
                 }
             }
@@ -304,7 +303,7 @@ namespace LR7_CSH
                 {
                     StudentsSubjDBA.ListOfChangesSubs.Add(new SubjectStatus(_bsForSubjects.Current as Subject,
                         currentValue, editedValue));
-                    subjectNameWasEddited = true;
+                    _subjectNameWasEddited = true;
                 }
             }
         }
@@ -320,7 +319,7 @@ namespace LR7_CSH
             BtForSelection.Text = "";
             dgvPersonalStudData.Visible = false;
         }
-        private void clearDBToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ClearDBToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are sure want to delete all data from Students DB?", "?",
                 MessageBoxButtons.YesNo,
@@ -335,6 +334,7 @@ namespace LR7_CSH
                     MessageBox.Show("Clearing failed.");
                 }
             }
+            ResetStudentsData();
         }
         private void ResetStudentsData()
         {
@@ -346,6 +346,7 @@ namespace LR7_CSH
             BtForSelection.Text = "";
             BtDeleteChosenSubject.Visible = false;
             dgvPersonalStudData.Visible = false;
+            BtLoadFromDB.Enabled = true;
         }
     }
 }

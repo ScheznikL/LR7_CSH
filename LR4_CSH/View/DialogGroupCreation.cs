@@ -9,6 +9,7 @@ namespace LR7_CSH
         private bool _editFlag = false;
         private BindingSource _bsGroupData;
         private List<string> _listOfChangedStudentID = new List<string>();
+        private List<Student> _listOfAddedStudents = new List<Student>();
         public DialogGroupCreation()
         {
             InitializeComponent();
@@ -39,6 +40,7 @@ namespace LR7_CSH
                     MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     StudentsSubjDBA.UpdateStudentDataBase(_listOfChangedStudentID);
+                    StudentsSubjDBA.StudentDBAddStudents(_listOfAddedStudents);
                 }
             }
         }
@@ -46,7 +48,7 @@ namespace LR7_CSH
         {
             Text = "Edit students data";
             _editFlag = true;
-            BtDelete.Visible = true;
+           // BtDelete.Visible = true;
             nUpDGroupNumber.ReadOnly = true;
             nUpDGroupNumber.Enabled = false;
             DGVStudData.AutoGenerateColumns = false;
@@ -79,14 +81,25 @@ namespace LR7_CSH
             var cell = DGVStudData.Rows[e.RowIndex].Cells[e.ColumnIndex];
             if (cell.IsInEditMode && _editFlag)
             {
+                var chosenstud = _bsGroupData.Current as Student;
                 string currentValue = cell.Value == null ? string.Empty : cell.Value.ToString();
                 string editedValue = e.FormattedValue == null ? string.Empty : e.FormattedValue.ToString();
-                if (currentValue != editedValue)
+                if (currentValue != editedValue && (currentValue != "0" || currentValue != ""))
                 {
-                    var chosenstud = _bsGroupData.Current as Student;
                     if (!_listOfChangedStudentID.Contains(chosenstud.Id))
                     {
                         _listOfChangedStudentID.Add(chosenstud.Id);
+                    }
+                }
+                if (currentValue == "" && e.ColumnIndex == DGVStudData.Columns["Firstname"].Index)
+                {
+                    
+                    chosenstud = _bsGroupData.List[_bsGroupData.List.Count-1] as Student;
+                    chosenstud.Name = e.FormattedValue.ToString();
+                    chosenstud.Groupnumber = Group.Groupnumber;
+                    if (!_listOfAddedStudents.Contains(chosenstud))
+                    {
+                        _listOfAddedStudents.Add(chosenstud);
                     }
                 }
             }
